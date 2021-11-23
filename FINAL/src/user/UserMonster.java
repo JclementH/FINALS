@@ -29,12 +29,12 @@ public class UserMonster extends Monster implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\r\nmonster.Stats          : " + this.stats +
-				"\r\nmonster.Wins           : " + this.wins +
-				"\r\nmonster.Loss           : " + this.loss +
-				"\r\nmonster.Name           : " + this.name +
-				"\r\nmonster.Nickname       : " + this.nick +
-				"\r\nmonster.guiPictureCode : " + this.guiPictureCode +
-				"\r\nmonster.monsterType    : " + this.monsterType;
+		return "\r\n\t\tplayer_monster.Stats          : " + this.stats +
+				"\r\n\t\tplayer_monster.Wins           : " + this.wins +
+				"\r\n\t\tplayer_monster.Loss           : " + this.loss +
+				"\r\n\t\tplayer_monster.Name           : " + this.name +
+				"\r\n\t\tplayer_monster.Nickname       : " + this.nick +
+				"\r\n\t\tplayer_monster.guiPictureCode : " + this.guiPictureCode +
+				"\r\n\t\tplayer_monster.monsterType    : " + this.monsterType;
 	}
 }

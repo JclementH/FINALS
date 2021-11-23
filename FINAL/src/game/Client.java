@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.Scanner;
 
+import files.SaveFile;
 import user.UserProfile;
 
 
@@ -12,7 +13,6 @@ public class Client {
 	// Data fields
 	private static String versionID;
 	private static String gameName;
-	private static UserProfile userProfile;
 		
 	// Methods
 	public Client() {
@@ -26,27 +26,55 @@ public class Client {
 	
 	public void run() {
 		info();
-		//Before game starts, check if user has a record. Otherwise, create new one.
+		//Before game starts, check if user has file. Otherwise, create new one.
 		while (true) {
 			//File paths
 			String projectDirectory = System.getProperty("user.dir");
-			String userSavePath = projectDirectory + "\\src\\files\\user_saved";
+			String clientSavePath = projectDirectory + "\\src\\files\\client_save.txt";
 
 			try {
-				File user = new File(userSavePath);
-				if (!user.exists()) {
-					FileOutputStream userFile = new FileOutputStream(user);
-					ObjectOutputStream newUser = new ObjectOutputStream(userFile);
-					newUser.writeObject(userProfile);
-					newUser.close();
-					System.out.println("User profile object saved");
+				File clientSave = new File(clientSavePath);
+				if (!clientSave.exists()) {
+					SaveFile saveFile = new SaveFile();
+
+					FileOutputStream clientSaveFile = new FileOutputStream(clientSave);
+					ObjectOutputStream newClientSave = new ObjectOutputStream(clientSaveFile);
+					newClientSave.writeObject(saveFile.toString());
+					newClientSave.close();
+					System.out.println("User profile object saved.");
 				} else {
 					System.out.println("There's already an existing file.");
-					FileInputStream userFile = new FileInputStream(user);
-					ObjectInputStream userSave = new ObjectInputStream(userFile);
-					System.out.println(userSave.readObject());
-					userSave.close();
-					System.out.println("User profile object saved");
+					try {
+						String line;
+						int i = 0;
+						boolean hasPassedTutorial = true;
+						//Read object
+						FileInputStream clientSaveFile = new FileInputStream(clientSave);
+						BufferedReader clientSaveObject = new BufferedReader(new InputStreamReader(clientSaveFile));
+						System.out.println(clientSaveObject.readLine());
+
+						while((line = clientSaveObject.readLine()) != null) {
+							System.out.println(line);
+							//Check if user has passed the tutorial
+							if(i == 0) {
+								String[] value = line.split(" = ");
+								if(value[1].equals("false")) {
+									hasPassedTutorial = false;
+								}
+							}
+							i++;
+						}
+
+						if(!hasPassedTutorial) {
+							System.out.println("User has not passed the tutorial.");
+							openTutorial();
+						}
+						//Close object
+						clientSaveObject.close();
+					} catch (Exception e) {
+						System.out.println("An error has occurred.");
+						e.printStackTrace();
+					}
 				}	
 			} catch (Exception e) {
 				System.out.println("An error has occurred.");
@@ -63,6 +91,10 @@ public class Client {
 	
 	private void showMainMenu() {
 		
+	}
+
+	private void openTutorial() {
+		System.out.println("Commencing tutorial kunuhay");
 	}
 	
 	private void searchOpponent() {
@@ -85,17 +117,8 @@ public class Client {
 	public void setGameName(String name) {
 		gameName = name;
 	}
-
-	public static void setUserProfile(UserProfile user) {
-		userProfile = user;
-	}
 	
 	public String getGameName() {
 		return gameName;
-	}
-
-
-	public UserProfile getUserProfile() {
-		return userProfile;
 	}
 }

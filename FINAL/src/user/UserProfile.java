@@ -17,7 +17,7 @@ public class UserProfile implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Gold: " + this.gold +
-				"\r\nPlayer_Monster: " + this.playerMonster;
+		return " :\r\n\r\n\tGold: " + this.gold + "G" +
+				"\r\n\tPlayer_Monster: \r\n\r\n" + this.playerMonster;
 	}
 }
