@@ -15,9 +15,25 @@ public class UserProfile implements Serializable {
 		playerMonster = m;
 	}
 
+	public void setPlayerMonster(UserMonster playerMonster) {
+		this.playerMonster = playerMonster;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public UserMonster getPlayerMonster() {
+		return playerMonster;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
 	@Override
 	public String toString() {
-		return " :\r\n\r\n\tGold: " + this.gold + "G" +
+		return " :\r\n\r\n\tGold: " + this.gold +
 				"\r\n\tPlayer_Monster: \r\n\r\n" + this.playerMonster;
 	}
 }

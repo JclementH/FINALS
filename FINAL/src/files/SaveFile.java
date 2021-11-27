@@ -28,7 +28,11 @@ public class SaveFile implements Serializable {
         return tutorialPassed;
     }
 
-    public String getUserProfile() {
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public String getUserProfileString() {
         if(userProfile == null) {
             return "= no profile yet";
         }
@@ -38,6 +42,6 @@ public class SaveFile implements Serializable {
     @Override
     public String toString() {
         return  "\r\ntutorial_passed = " + getTutorialPassed() +
-                "\r\nuser_profile " + getUserProfile();
+                "\r\nuser_profile " + getUserProfileString();
     }
 }

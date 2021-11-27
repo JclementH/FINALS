@@ -27,6 +27,10 @@ public class UserMonster extends Monster implements Serializable {
 		this.nick = nick;
 	}
 
+	public int getLoss() {
+		return loss;
+	}
+
 	@Override
 	public String toString() {
 		return "\r\n\t\tplayer_monster.Stats          : " + this.stats +
